@@ -135,10 +135,10 @@ while running:
 
 # ---- Exporting ---- #
     if key[pygame.K_s]:
-        print(os.path.exists(f'drawing{n}.jpg'))
+        print(os.path.exists(f'Exports/drawing{n}.jpg'))
         Exportspace.blit(Drawscreen, Drawingspace)
 
-        if os.path.exists(f'drawing{n}.jpg') == True:
+        if os.path.exists(f'Exports/drawing{n}.jpg') == True:
             n += 1
             pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')
             print('Saved! (True)')
@@ -148,6 +148,8 @@ while running:
             print('Saved! (False)')
 
 # ---- Moving Files to Folder ---- #
+
+print('Balls')
 
 pygame.quit()
 
