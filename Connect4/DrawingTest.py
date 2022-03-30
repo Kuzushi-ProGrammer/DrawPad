@@ -51,7 +51,7 @@ dimensions = pygame.display.get_desktop_sizes()         # Grabs dimensions of de
 
 # ------ Resolution ------- #
 try:
-    dimensions = dimensions[1]                          # Accounts for dual monitors (dimensions[0] for single screen?
+    dimensions = dimensions[0]                          # Accounts for dual monitors (dimensions[0] for single screen?
 except:
     pass
 
@@ -144,12 +144,10 @@ while running:
             print('Saved! (True)')
 
         else:
+            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
             print('Saved! (False)')
 
 # ---- Moving Files to Folder ---- #
-
-print('Balls')
-print('branchtest')
 
 pygame.quit()
 
