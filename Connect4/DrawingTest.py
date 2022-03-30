@@ -62,7 +62,7 @@ resolution = dimensions
 Drawingspace = (100, 50, windresx - 150, windresy - 100) # Rect
 Drawscreen = screen.subsurface(Drawingspace)
 Exportspace = pygame.Surface((windresx - 150, windresy - 100))
-Exportspace.blit(Drawscreen, (100, 50))
+Exportspace.blit(Drawscreen, (0, 0), Drawingspace)
 
 # ---- Initial Interface ---- #
 screen.fill(grey)
@@ -136,20 +136,20 @@ while running:
 # ---- Exporting ---- #
     if key[pygame.K_s]:
         print(os.path.exists(f'Exports/drawing{n}.jpg'))
-        Exportspace.blit(Drawscreen, Drawingspace)
-
-        if os.path.exists(f'Exports/drawing{n}.jpg') == True:
+        Exportspace.blit(Drawscreen, Drawingspace)                                  # Also saves with left and top black bars (has something to do with the surface)
+            
+        if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
             n += 1
-            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')
+            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')               
             print('Saved! (True)')
 
         else:
-            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')
             print('Saved! (False)')
 
 # ---- Moving Files to Folder ---- #
 
 print('Balls')
+print('branchtest')
 
 pygame.quit()
 
