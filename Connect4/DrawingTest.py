@@ -11,15 +11,17 @@
     # Controls
 
 # ---- Imports ---- #
-import pygame, sys, os, shutil
+import pygame, sys, os, PIL
 from pygame.locals import *
 from os import path
 from os.path import exists
+from PIL import Image
 
 # ---- Variables ---- #
 mposcoords = []
 colour = (255, 0, 0)                                    # Default Colour
 n = 0
+drawnum = ('Exports/drawing{}.jpg').format(n)
 
 # ---- Colours ---- #                                   # It's getting annoying manually entering values lol
 red = (255, 0, 0)
@@ -51,7 +53,7 @@ dimensions = pygame.display.get_desktop_sizes()         # Grabs dimensions of de
 
 # ------ Resolution ------- #
 try:
-    dimensions = dimensions[0]                          # Accounts for dual monitors (dimensions[0] for single screen?
+    dimensions = dimensions[0]                          # Accounts for dual monitors and single monitors
 except:
     pass
 
@@ -59,10 +61,10 @@ resolution = dimensions
 (windresx, windresy) = resolution
 
 # ---- Drawing Subsurface ---- #
-Drawingspace = (100, 50, windresx - 150, windresy - 100) # Rect
-Drawscreen = screen.subsurface(Drawingspace)
-Exportspace = pygame.Surface((windresx - 150, windresy - 100))
-Exportspace.blit(Drawscreen, (0, 0), Drawingspace)
+Drawingspace = (100, 50, windresx - 150, windresy - 100)# Rect
+Drawscreen = screen.subsurface(Drawingspace)            # Creates a subsurface that can be 'screenshotted' later
+Exportspace = pygame.Surface((windresx, windresy))
+Exportspace.blit(Drawscreen, Drawingspace)
 
 # ---- Initial Interface ---- #
 screen.fill(grey)
@@ -73,6 +75,17 @@ pygame.draw.rect(screen, white, Drawingspace)
 #Topside = (0, 0, windresx, 50)                          # Variables for drawing the bars
 #Rightside = (windresx - 50, 0, 50, windresy)
 #Bottomside = (0, windresy - 50, windresx, 50)
+
+# ---- Anti-Dupe ---- #
+exists = True
+while exists == True:
+    if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
+            n += 1
+            exists = True
+   
+    else:
+        exists = False
+        continue
 
 # ------------------------------------------------------------------------------- # MAIN LOOP
 running = True
@@ -135,19 +148,34 @@ while running:
 
 # ---- Exporting ---- #
     if key[pygame.K_s]:
-        print(os.path.exists(f'Exports/drawing{n}.jpg'))
-        Exportspace.blit(Drawscreen, Drawingspace)                                  # Also saves with left and top black bars (has something to do with the surface)
+        pressed = True
+        while pressed == True:
+            print(os.path.exists(f'Exports/drawing{n}.jpg'))
+            Exportspace.blit(Drawscreen, Drawingspace)                                  # Also saves with left and top black bars (has something to do with the surface)
             
-        if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
-            n += 1
-            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')               
-            print('Saved! (True)')
+            if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
+                n += 1
 
-        else:
-            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
-            print('Saved! (False)')
+                pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
 
-# ---- Moving Files to Folder ---- #
+                img = Image.open(f'Exports/drawing{n}.jpg')
+                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
+                imgcrop = imgcrop.save(drawnum)
+                imgcrop.show()
+
+                print('Saved! (True)')
+                pressed = False
+
+            else:
+                pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
+
+                img = Image.open(f'Exports/drawing{n}.jpg')
+                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
+                imgcrop = imgcrop.save(drawnum)
+                imgcrop.show()
+
+                print('Saved! (False)')
+                pressed = False
 
 pygame.quit()
 
