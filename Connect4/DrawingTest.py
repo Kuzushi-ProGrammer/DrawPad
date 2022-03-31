@@ -161,7 +161,6 @@ while running:
                 img = Image.open(f'Exports/drawing{n}.jpg')
                 imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
                 imgcrop = imgcrop.save(drawnum)
-                imgcrop.show()
 
                 print('Saved! (True)')
                 pressed = False
@@ -172,7 +171,6 @@ while running:
                 img = Image.open(f'Exports/drawing{n}.jpg')
                 imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
                 imgcrop = imgcrop.save(drawnum)
-                imgcrop.show()
 
                 print('Saved! (False)')
                 pressed = False
