@@ -94,7 +94,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+            
     pygame.display.update()
 
     #pygame.draw.rect (screen, grey, Leftside)           # Left sidebar             
@@ -112,10 +112,14 @@ while running:
 # ---- Mouse Tracking ---- #
     mouse = pygame.mouse.get_pressed(num_buttons = 3)
     mpos = pygame.mouse.get_pos()
-    key = pygame.key.get_pressed()
 
     mposcoords = mpos
     (mposx, mposy) = mposcoords
+
+# ---- Key Logic ---- #
+
+    key = pygame.key.get_pressed()
+    pygame.key.set_repeat(0, 50000) # Been looking into this, I need some way to either delay it for now or make it irrepeatable temporarily
 
 # ---- Colour Selection ---- #
     if mposx >= 25 and mposx <= 75:
