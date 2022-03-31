@@ -159,20 +159,20 @@ while running:
                 pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
 
                 img = Image.open(f'Exports/drawing{n}.jpg')
-                img = img.crop((100, 50, windresx - 50, windresy - 50))
-                img = img.save(drawnum)              
+                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
+                imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg")              
 
-                print('Saved! (True)')
+                print("Saved! (Path Exists)")
                 pressed = False
 
             else:
                 pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
 
                 img = Image.open(f'Exports/drawing{n}.jpg')
-                img = img.crop((100, 50, windresx - 50, windresy - 50))
-                img = img.save(drawnum)
+                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
+                imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg") 
 
-                print('Saved! (False)')
+                print("Saved! (Path Doesn't Exist)")
                 pressed = False
 
 pygame.quit()
