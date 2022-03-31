@@ -10,3 +10,5 @@ Libraries in use:
 - Sys
 - Os
 - PIL (Pillow)
+
+Oh also if there's any 'innapropriate' images in there that's just me screwing around and I accidentally left them in there and am too lazy to get them out
