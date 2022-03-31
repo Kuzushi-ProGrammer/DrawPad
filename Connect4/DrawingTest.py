@@ -21,7 +21,7 @@ from PIL import Image
 mposcoords = []
 colour = (255, 0, 0)                                    # Default Colour
 n = 0
-drawnum = ('Exports/drawing{}.jpg').format(n)
+drawnum = ("Exports/drawing{}.jpg").format(n)
 
 # ---- Colours ---- #                                   # It's getting annoying manually entering values lol
 red = (255, 0, 0)
@@ -159,8 +159,8 @@ while running:
                 pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
 
                 img = Image.open(f'Exports/drawing{n}.jpg')
-                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
-                imgcrop = imgcrop.save(drawnum)
+                img = img.crop((100, 50, windresx - 50, windresy - 50))
+                img = img.save(drawnum)              
 
                 print('Saved! (True)')
                 pressed = False
@@ -169,8 +169,8 @@ while running:
                 pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
 
                 img = Image.open(f'Exports/drawing{n}.jpg')
-                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
-                imgcrop = imgcrop.save(drawnum)
+                img = img.crop((100, 50, windresx - 50, windresy - 50))
+                img = img.save(drawnum)
 
                 print('Saved! (False)')
                 pressed = False
