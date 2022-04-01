@@ -11,7 +11,7 @@
     # Controls
 
 # ---- Imports ---- #
-import pygame, sys, os, PIL
+import pygame, sys, os, PIL, keyboard
 from pygame.locals import *
 from os import path
 from os.path import exists
@@ -119,7 +119,6 @@ while running:
 # ---- Key Logic ---- #
 
     key = pygame.key.get_pressed()
-    pygame.key.set_repeat(0, 50000) # Been looking into this, I need some way to either delay it for now or make it irrepeatable temporarily
 
 # ---- Colour Selection ---- #
     if mposx >= 25 and mposx <= 75:
@@ -151,9 +150,11 @@ while running:
         pygame.draw.rect(screen, white, Drawingspace)
 
 # ---- Exporting ---- #
-    if key[pygame.K_s]:
+    if key[pygame.K_s] == True:
         pressed = True
         while pressed == True:
+            keyboard.press_and_release('S')
+
             print(os.path.exists(f'Exports/drawing{n}.jpg'))
             Exportspace.blit(Drawscreen, Drawingspace)                                  # Also saves with left and top black bars (has something to do with the surface)
             
@@ -178,6 +179,9 @@ while running:
 
                 print("Saved! (Path Doesn't Exist)")
                 pressed = False
+
+    elif key[pygame.K_s] == False:
+        pressed = False
 
 pygame.quit()
 
