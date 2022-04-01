@@ -5,7 +5,7 @@ This is my own special personal project i'm making using python and some other l
 
 I'm kind of sharing this here because I think it's really cool that I can share my stuff like this between computers and I also want to show some people too!
 
-** Current build is not very finished right now, it could have some bugs or just straight up not work.**
+**Current build is not very finished right now, it could have some bugs or just straight up not work.**
 
 Libraries in use:
 - Pygame: https://www.pygame.org/docs/
