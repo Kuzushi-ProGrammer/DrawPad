@@ -51,6 +51,54 @@ pygame.display.set_caption('Drawing Test Program')      # Sets title of window
 screen = pygame.display.set_mode()                      # Creates a window for the game to be in
 dimensions = pygame.display.get_desktop_sizes()         # Grabs dimensions of desktop for window sizing
 
+# ---- Exporting ---- # MY FUCKING BRAIN HURTS AAA
+def keypress():
+    n = 0
+    pressedkey = False
+
+    # ---- Anti-Dupe ---- #
+    exists = True
+    while exists == True:
+        if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
+            n += 1
+            exists = True
+   
+        else:
+            exists = False
+            break
+
+    # ---- Exporting ---- #
+    pressedkey = True
+    while pressedkey == True:
+
+        print(os.path.exists(f'Exports/drawing{n}.jpg'))
+        Exportspace.blit(Drawscreen, Drawingspace)                                  # Also saves with left and top black bars (has something to do with the surface)
+            
+        if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
+            n += 1
+
+            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
+
+            img = Image.open(f'Exports/drawing{n}.jpg')
+            imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
+            imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg")              
+
+            print("Saved! (Path Exists)")
+            pressedkey = False
+
+        elif os.path.exists(f'Exports/drawing{n}.jpg') == False:
+            pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
+
+            img = Image.open(f'Exports/drawing{n}.jpg')
+            imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
+            imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg") 
+
+            print("Saved! (Path Doesn't Exist)")
+            pressedkey = False
+        else:
+            pressedkey = False
+            pass
+
 # ------ Resolution ------- #
 try:
     dimensions = dimensions[0]                          # Accounts for dual monitors and single monitors
@@ -75,17 +123,6 @@ pygame.draw.rect(screen, white, Drawingspace)
 #Topside = (0, 0, windresx, 50)                          # Variables for drawing the bars
 #Rightside = (windresx - 50, 0, 50, windresy)
 #Bottomside = (0, windresy - 50, windresx, 50)
-
-# ---- Anti-Dupe ---- #
-exists = True
-while exists == True:
-    if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
-            n += 1
-            exists = True
-   
-    else:
-        exists = False
-        continue
 
 # ------------------------------------------------------------------------------- # MAIN LOOP
 running = True
@@ -119,6 +156,9 @@ while running:
 # ---- Key Logic ---- #
 
     key = pygame.key.get_pressed()
+    
+    if pygame.key[K_s]: # broke
+        keypress()
 
 # ---- Colour Selection ---- #
     if mposx >= 25 and mposx <= 75:
@@ -149,39 +189,10 @@ while running:
     if key[pygame.K_SPACE]:
         pygame.draw.rect(screen, white, Drawingspace)
 
-# ---- Exporting ---- #
-    if key[pygame.K_s] == True:
-        pressed = True
-        while pressed == True:
-            keyboard.press_and_release('S')
 
-            print(os.path.exists(f'Exports/drawing{n}.jpg'))
-            Exportspace.blit(Drawscreen, Drawingspace)                                  # Also saves with left and top black bars (has something to do with the surface)
-            
-            if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
-                n += 1
 
-                pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
 
-                img = Image.open(f'Exports/drawing{n}.jpg')
-                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
-                imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg")              
 
-                print("Saved! (Path Exists)")
-                pressed = False
-
-            else:
-                pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
-
-                img = Image.open(f'Exports/drawing{n}.jpg')
-                imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
-                imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg") 
-
-                print("Saved! (Path Doesn't Exist)")
-                pressed = False
-
-    elif key[pygame.K_s] == False:
-        pressed = False
 
 pygame.quit()
 
