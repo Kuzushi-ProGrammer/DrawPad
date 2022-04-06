@@ -51,9 +51,9 @@ pygame.display.set_caption('Drawing Test Program')      # Sets title of window
 screen = pygame.display.set_mode()                      # Creates a window for the game to be in
 dimensions = pygame.display.get_desktop_sizes()         # Grabs dimensions of desktop for window sizing
 
-# ---- Exporting ---- # MY FUCKING BRAIN HURTS AAA
+# ---- S PRESSED FUNCTION ---- # MY FUCKING BRAIN HURTS AAA
 def keypress():
-    n = 0
+    global n # GLOBAL VARIABLE S O M G   MSMNMNMM
     pressedkey = False
 
     # ---- Anti-Dupe ---- #
@@ -157,7 +157,7 @@ while running:
 
     key = pygame.key.get_pressed()
     
-    if pygame.key[K_s]: # broke
+    if key[pygame.K_s]:
         keypress()
 
 # ---- Colour Selection ---- #
