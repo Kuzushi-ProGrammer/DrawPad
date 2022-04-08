@@ -1,6 +1,6 @@
 # Resizable window
 # Find a way to update it faster (or) find a way make smooth lines
-# RGB Colour picker (Wheel or manual entry)
+# RGB Colour picker (Wheel or manual entry) (pygame-menu does that) (just need to implement)
 # Colour picker (Off Canvas)
 # Transparency (o-o)
 
@@ -71,6 +71,8 @@ Drawingspace = (100, 50, windresx - 150, windresy - 100)# Rect
 Drawscreen = screen.subsurface(Drawingspace)            # Creates a subsurface that can be 'screenshotted' later
 Exportspace = pygame.Surface((windresx, windresy))
 Exportspace.blit(Drawscreen, Drawingspace)
+
+
 
 # ---- S PRESSED FUNCTION ---- #
 def keypress():
@@ -188,16 +190,24 @@ def mainfunc():
         if key[pygame.K_SPACE]:
             pygame.draw.rect(screen, white, Drawingspace)
 
-# ---- Menu ---- #
-menusurf = pygame.Surface((windresx, windresy))
-menu = pygame_menu.Menu('Deez fucking nuts', windresx, windresy, theme = pygame_menu.themes.THEME_SOLARIZED)
+        if key[pygame.K_ESCAPE]:
+            print('escaped')
+            mainmenufunc()
 
-menu.add.text_input('Yes?: ', default = '')
-menu.add.button('Draw!', mainfunc)
-# menu.add.button('Controls', controlsfunc)
-menu.add.clock()
-menu.add.color_input('COLOUR SELECT!?!?!? LETS GOOOO', 'rgb')
-menu.mainloop(screen)
+# ---- Menu ---- #
+def mainmenufunc():
+    menu = pygame_menu.Menu('Deez fucking nuts', windresx, windresy, theme = pygame_menu.themes.THEME_SOLARIZED)
+
+    menu.add.text_input('Yes?: ', default = '')
+    menu.add.button('Draw!', mainfunc)
+    # menu.add.button('Controls', controlsfunc)
+    menu.add.clock()
+    menu.add.color_input('COLOUR SELECT!?!?!? LETS GOOOO', 'rgb')
+    menu.mainloop(screen)
+
+# ---- Calling functions ---- #
+
+mainmenufunc()
 
 
 pygame.quit()
