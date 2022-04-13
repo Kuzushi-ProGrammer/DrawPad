@@ -1,17 +1,7 @@
-# Resizable window
-# Find a way to update it faster (or) find a way make smooth lines
-# RGB Colour picker (Wheel or manual entry) (pygame-menu does that) (just need to implement)
-# Colour picker (Off Canvas)
-# Transparency (o-o)
 
-# Menu
-    # Store image when in menu so it doesn't get wiped
-    # Export Feature
-    # Change Background Colour
-    # Controls
 
 # ---- Imports ---- #
-import pygame, sys, os, PIL, pygame_menu
+import pygame, sys, os, PIL, pygame_menu              # UPDATE PIL TO 9.1.0 AND PYGAME-MENU TO 4.2.7
 from pygame.locals import *
 from os import path
 from os.path import exists
@@ -38,12 +28,12 @@ pygame.font.init()                                      # Initializes the font p
 
 # ---- OS Pathfinding / Directory Creation ---- #
 Path = os.getcwd()                                      # Finds the path the .py file is in
-Expath = Path + "/Exports"                             # Adds an additional part to the path to be added
+Expath = Path + "/Exports"                              # Adds an additional part to the path to be added
 try:
-    os.mkdir(Expath)                                       # Makes the new directory
+    os.mkdir(Expath)                                    # Makes the new directory
 except:
     pass
-print(Expath)
+print(Expath)                                           # Debugging
 print(Path)
 
 # ---- Main Window ---- #
@@ -58,13 +48,7 @@ except:
     pass
 
 resolution = dimensions
-(windresx, windresy) = resolution
-
-#Don't actually need this for now
-#Leftside = (0, 0, 100, windresx - 50)                   # Position from left, position from top, width, height
-#Topside = (0, 0, windresx, 50)                          # Variables for drawing the bars
-#Rightside = (windresx - 50, 0, 50, windresy)
-#Bottomside = (0, windresy - 50, windresx, 50)
+(windresx, windresy) = resolution                       # Unpacking the tuple for use as two variables
 
 # ---- Drawing Subsurface ---- #
 Drawingspace = (100, 50, windresx - 150, windresy - 100)# Rect
@@ -72,16 +56,17 @@ Drawscreen = screen.subsurface(Drawingspace)            # Creates a subsurface t
 Exportspace = pygame.Surface((windresx, windresy))
 Exportspace.blit(Drawscreen, Drawingspace)
 
+def quitfunc():
+    raise SystemExit                                    # This closes the program
 
-
-# ---- S PRESSED FUNCTION ---- #
+# ---- Save Function ---- #
 def keypress():
-    global n
-
+    global n                                                                   # Allows n to be changed outside and inside of the function 
+                                                                               # (potentially unnesesary but I couldn't get it to work any other)
     # ---- Anti-Dupe ---- #
     exists = True
-    while exists == True:
-        if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
+    while exists == True:                                                      # Checks for a duplicate file name before saving (This is to start on the right unused filename on startup)
+        if os.path.exists(f'Exports/drawing{n}.jpg') == True:                   
             n += 1
             exists = True
    
@@ -91,20 +76,19 @@ def keypress():
 
     # ---- Exporting ---- #
 
-    print(os.path.exists(f'Exports/drawing{n}.jpg'))
-    Exportspace.blit(Drawscreen, Drawingspace)                                  # Also saves with left and top black bars (has something to do with the surface)
+    print(os.path.exists(f'Exports/drawing{n}.jpg'))                            # Debugging
+    Exportspace.blit(Drawscreen, Drawingspace)                                  # "Saves" the screen to be exported
             
-    if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Currently overwrites files of same name (Not intentional)
+    if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Checks if there is already a file with the same filename in the file
         n += 1
 
-        pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
+        pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')               # Saves the file to the folder path
 
-        img = Image.open(f'Exports/drawing{n}.jpg')
-        imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
-        imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg")              
+        img = Image.open(f'Exports/drawing{n}.jpg')                             # Opens the image for cropping
+        imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))             # Crops the image
+        imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg")                       # Overwrites the image that was just saved
 
-        print("Saved! (Path Exists)")
-        pressedkey = False
+        print("Saved! (Path Exists)")                                
 
     elif os.path.exists(f'Exports/drawing{n}.jpg') == False:
         pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
@@ -118,13 +102,13 @@ def keypress():
     else:
         pass
 
-# ------------------------------------------------------------------------------- # MAIN LOOP
+# ---- Main Function ---- #
 def mainfunc():
 
     screen.fill(grey)
     pygame.draw.rect(screen, white, Drawingspace)
 
-    global colour
+    global colour                                                                       # Makes the colour variable useable in and outside the function
 
     running = True
     while running:
@@ -135,11 +119,6 @@ def mainfunc():
             
         pygame.display.update()
 
-        #pygame.draw.rect (screen, grey, Leftside)           # Left sidebar             
-        #pygame.draw.rect (screen, grey, Topside)            # Top sidebar
-        #pygame.draw.rect (screen, grey, Rightside)          # Right sidebar
-        #pygame.draw.rect (screen, grey, Bottomside)         # Bottom sidebar
-    
         # ---- Colour Swatches ---- #
         pygame.draw.rect(screen, red, (25, 25, 50, 50))      # Red                      # Screen variable is the window
         pygame.draw.rect(screen, green, (25, 100, 50, 50))   # Green                    # First bracket tuple is RGB value
@@ -152,17 +131,17 @@ def mainfunc():
         mpos = pygame.mouse.get_pos()
 
         mposcoords = mpos
-        (mposx, mposy) = mposcoords
+        (mposx, mposy) = mposcoords                                                     # Unpacking another tuple to get mouse position in x and y coordinates
 
         # ---- Key Logic ---- #
 
         key = pygame.key.get_pressed()
     
-        if key[pygame.K_s]:
+        if key[pygame.K_s]:                                                             # Activates the save function
             keypress()
 
         # ---- Colour Selection ---- #
-        if mposx >= 25 and mposx <= 75:
+        if mposx >= 25 and mposx <= 75:                                                 # Colour Selection (For now will change later)
             if mposy >= 25 and mposy <= 75 and mouse == (False, False, True):           # Red
                 colour = red
 
@@ -180,63 +159,46 @@ def mainfunc():
         # ---- Drawing Logic ---- #
         try:
             if mouse == (True, False, False):
-                if mposx  >= 100 and mposx <= windresx - 50 and mposy >= 50 and mposy <= windresy - 50:
-                    pygame.draw.circle(screen, colour, mpos, 5)
+                if mposx  >= 100 and mposx <= windresx - 50 and mposy >= 50 and mposy <= windresy - 50: # Checks if mouse is in bounds of the canvas
+                    pygame.draw.circle(screen, colour, mpos, 5)                                         # Draws a bunch of circles in place of a brush
                     pygame.display.update()
         except ValueError:
             pass
    
         # ---- Canvas Wipe ---- #
         if key[pygame.K_SPACE]:
-            pygame.draw.rect(screen, white, Drawingspace)
+            pygame.draw.rect(screen, white, Drawingspace)                                               # Fills drawing space with white
 
-        if key[pygame.K_ESCAPE]:
-            print('escaped')
+        if key[pygame.K_ESCAPE]:                                                                        # Exits back to main menu
+            print('escaped')    
             mainmenufunc()
 
 # ---- Menu ---- #
 def mainmenufunc():
-    menu = pygame_menu.Menu('Deez fucking nuts', windresx, windresy, theme = pygame_menu.themes.THEME_SOLARIZED)
+ 
+    customtheme = pygame_menu.themes.THEME_SOLARIZED.copy()                                             # Menu shenanigains (Still experimenting with)
+    customtheme.title_background_color = grey
+    customtheme.background_color = white
+    customtheme.title_font_color = black
+    customtheme.widget_font_color = black
 
-    menu.add.text_input('Yes?: ', default = '')
+
+    menu = pygame_menu.Menu('Deez fucking nuts', windresx, windresy, theme = customtheme)               # Loads the menu with the correct dimensions and theme
+
+    menu.add.text_input('Yes?: ', default = '')                                                         # Adds some buttons and input boxes (Testing)
     menu.add.button('Draw!', mainfunc)
     # menu.add.button('Controls', controlsfunc)
     menu.add.clock()
     menu.add.color_input('COLOUR SELECT!?!?!? LETS GOOOO', 'rgb')
+    menu.add.button("Quit", quitfunc)
     menu.mainloop(screen)
-
+  
 # ---- Calling functions ---- #
 
-mainmenufunc()
+mainmenufunc()                                                                                             # Starts the program (Ironic it's at the end of the code)
 
+pygame.quit()                                                                                              # When program is force closed
 
-pygame.quit()
-
-
-
-'''                                                                 # Sample code for reference
-# Run until the user asks to quit
-running = True
-while running:
-
-    # Did the user click the window close button?
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Fill the background with white
-    screen.fill((255, 255, 255))
-
-    # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
-
-    # Flip the display
-    pygame.display.flip()                                           # Updates the image on screen
-
-pygame.quit()
-
-'''
-
-input('-Press Enter to Exit-')
+input('-Press Enter to Exit-')                                                                             # Habit
 
 
