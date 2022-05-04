@@ -15,3 +15,5 @@ Modules in use:
 - Pygame-Menu (4.2.6) https://pygame-menu.readthedocs.io/en/4.2.6/#
 
 Oh also if there's any 'innapropriate' images in there that's just me screwing around and I accidentally left them in there and am too lazy to get them out *or* left them in cause they look cool ^^
+
+On a little bit of a haitus right now, burnout for this project setting in and i might just release as is once everything works properly
