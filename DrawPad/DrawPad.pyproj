@@ -5,7 +5,7 @@
     <ProjectGuid>cb9755e5-93c6-44e3-9e09-00ca4171b907</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>DrawingTest.py</StartupFile>
+    <StartupFile>DrawPad.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DrawingTest.py" />
+    <Compile Include="DrawPad.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

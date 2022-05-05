@@ -55,7 +55,7 @@ Exportspace = pygame.Surface((windresx, windresy))
 Exportspace.blit(Drawscreen, Drawingspace)
 
 def quitfunc():
-    raise SystemExit                                    # This closes the program
+    raise quit()                                                               # This closes the program
 
 # ---- Save Function ---- #
 def keypress():

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DrawingTest", "Connect4\DrawingTest.pyproj", "{CB9755E5-93C6-44E3-9E09-00CA4171B907}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DrawPad", "DrawPad\DrawPad.pyproj", "{CB9755E5-93C6-44E3-9E09-00CA4171B907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
