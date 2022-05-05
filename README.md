@@ -15,3 +15,5 @@ Modules in use:
 - Pygame-Menu (4.2.7) https://pygame-menu.readthedocs.io/en/4.2.7/#
 
 Some sample images are in the folder titled "Sample Images"
+
+Images get saved to the "Exports" folder
