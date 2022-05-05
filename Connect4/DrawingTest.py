@@ -33,11 +33,9 @@ try:
     os.mkdir(Expath)                                    # Makes the new directory
 except:
     pass
-print(Expath)                                           # Debugging
-print(Path)
 
 # ---- Main Window ---- #
-pygame.display.set_caption('Drawing Test Program')      # Sets title of window
+pygame.display.set_caption('DrawPad')                   # Sets title of window
 screen = pygame.display.set_mode()                      # Creates a window for the game to be in
 dimensions = pygame.display.get_desktop_sizes()         # Grabs dimensions of desktop for window sizing
 
@@ -74,9 +72,7 @@ def keypress():
             exists = False
             break
 
-    # ---- Exporting ---- #
-
-    print(os.path.exists(f'Exports/drawing{n}.jpg'))                            # Debugging
+    # ---- Exporting ---- #                                                     # Debugging
     Exportspace.blit(Drawscreen, Drawingspace)                                  # "Saves" the screen to be exported
             
     if os.path.exists(f'Exports/drawing{n}.jpg') == True:                       # Checks if there is already a file with the same filename in the file
@@ -86,9 +82,7 @@ def keypress():
 
         img = Image.open(f'Exports/drawing{n}.jpg')                             # Opens the image for cropping
         imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))             # Crops the image
-        imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg")                       # Overwrites the image that was just saved
-
-        print("Saved! (Path Exists)")                                
+        imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg")                       # Overwrites the image that was just saved                              
 
     elif os.path.exists(f'Exports/drawing{n}.jpg') == False:
         pygame.image.save(Exportspace, f'Exports/drawing{n}.jpg')  
@@ -96,9 +90,6 @@ def keypress():
         img = Image.open(f'Exports/drawing{n}.jpg')
         imgcrop = img.crop((100, 50, windresx - 50, windresy - 50))
         imgcrop = imgcrop.save(f"Exports/drawing{n}.jpg") 
-
-        print("Saved! (Path Doesn't Exist)")
-       
     else:
         pass
 
@@ -169,8 +160,7 @@ def mainfunc():
         if key[pygame.K_SPACE]:
             pygame.draw.rect(screen, white, Drawingspace)                                               # Fills drawing space with white
 
-        if key[pygame.K_ESCAPE]:                                                                        # Exits back to main menu
-            print('escaped')    
+        if key[pygame.K_ESCAPE]:                                                                        # Exits back to main menu 
             mainmenufunc()
 
 # ---- Menu ---- #
@@ -183,13 +173,11 @@ def mainmenufunc():
     customtheme.widget_font_color = black
 
 
-    menu = pygame_menu.Menu('Deez fucking nuts', windresx, windresy, theme = customtheme)               # Loads the menu with the correct dimensions and theme
+    menu = pygame_menu.Menu('DrawPad', windresx, windresy, theme = customtheme)               # Loads the menu with the correct dimensions and theme
 
-    menu.add.text_input('Yes?: ', default = '')                                                         # Adds some buttons and input boxes (Testing)
+    menu.add.label("Controls for this program are on the GitHub Wiki.")
+    menu.add.label("Have Fun!")
     menu.add.button('Draw!', mainfunc)
-    # menu.add.button('Controls', controlsfunc)
-    menu.add.clock()
-    menu.add.color_input('COLOUR SELECT!?!?!? LETS GOOOO', 'rgb')
     menu.add.button("Quit", quitfunc)
     menu.mainloop(screen)
   
