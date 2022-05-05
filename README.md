@@ -1,4 +1,4 @@
-# DrawingTest
+# DrawPad
 
 # ---- Personal Project --- #
 This is my own special personal project I made using python and some other modules like pygame.
