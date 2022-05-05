@@ -1,19 +1,17 @@
 # DrawingTest
 
 # ---- Personal Project --- #
-This is my own special personal project i'm making using python and some other modules like pygame.
+This is my own special personal project I made using python and some other modules like pygame.
 
 I'm kind of sharing this here because I think it's really cool that I can share my stuff like this between computers and I also want to show some people too!
 
-**Current build is not very finished right now, it could have some bugs or just straight up not work.**
+**Current build is stable. I'm probably not going to update this in the future, but it was a fun little project!**
 
-First release may come very soon, I'm adding some more features right now that will make the program actually usable.
+First release is out! Have fun drawing! Instructions are on the GitHub Wiki page!
 
 Modules in use:
 - Pygame (2.1.2) https://www.pygame.org/docs/
 - Pillow (9.0.1) https://pillow.readthedocs.io/en/stable/
-- Pygame-Menu (4.2.6) https://pygame-menu.readthedocs.io/en/4.2.6/#
+- Pygame-Menu (4.2.7) https://pygame-menu.readthedocs.io/en/4.2.7/#
 
-Oh also if there's any 'innapropriate' images in there that's just me screwing around and I accidentally left them in there and am too lazy to get them out *or* left them in cause they look cool ^^
-
-On a little bit of a haitus right now, burnout for this project setting in and i might just release as is once everything works properly
+Some sample images are in the folder titled "Sample Images"
