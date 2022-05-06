@@ -9,11 +9,17 @@ I'm kind of sharing this here because I think it's really cool that I can share 
 
 First release is out! Have fun drawing! Instructions are on the GitHub Wiki page!
 
-Modules in use:
-- Pygame (2.1.2) https://www.pygame.org/docs/
-- Pillow (9.0.1) https://pillow.readthedocs.io/en/stable/
-- Pygame-Menu (4.2.7) https://pygame-menu.readthedocs.io/en/4.2.7/#
-
 Some sample images are in the folder titled "Sample Images"
 
 Images get saved to the "Exports" folder
+
+**Make sure you have these things installed:**
+- Python 3.8.8 (https://www.python.org/downloads/release/python-388/)
+- Pygame 2.1.2 (https://pypi.org/project/pygame/)
+- Pillow 9.0.1 (https://pypi.org/project/Pillow/)
+- Pygame-Menu 4.2.7 (https://pypi.org/project/pygame-menu/)
+
+To install those you're gonna want to have pip as well:
+https://pypi.org/project/pip/
+
+I'm not 100% sure if you have to have all of them installed but python and pygame for sure :>
